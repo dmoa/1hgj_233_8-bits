@@ -2,7 +2,7 @@ local Bullets = {
     bullets = {},
     bulletW = 1,
     bulletH = 5,
-    bulletYV = 5
+    bulletYV = 2
 }
 
 function Bullets:draw()
@@ -15,17 +15,15 @@ function Bullets:update(dt)
 
     for k, bullet in ipairs(self.bullets) do
 
-        print(k)
-
         bullet.y = bullet.y + self.bulletYV * bullet.direction
         if bullet.y < 0 then
             bullet.DELETE = true
         end
     end
 
-    for k, bullet in ipairs(self.bullets) do
-        if bullet.DELETE then
-            self.bullets[k] = nil
+    for i = #self.bullets, 1, -1 do
+        if self.bullets[i].DELETE then
+            table.remove(self.bullets, i)
         end
     end
 
