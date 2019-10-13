@@ -16,8 +16,12 @@ function Bullets:update(dt)
     for k, bullet in ipairs(self.bullets) do
 
         bullet.y = bullet.y + self.bulletYV * bullet.direction
-        if bullet.y < 0 then
+        if bullet.y + self.bulletH < 0 then
             bullet.DELETE = true
+        end
+        if block:isColliding(bullet.x, bullet.y, self.bulletW, self.bulletH) then
+            bullet.DELETE = true
+            block:shrink(-1)
         end
     end
 
@@ -26,6 +30,7 @@ function Bullets:update(dt)
             table.remove(self.bullets, i)
         end
     end
+
 
 end
 

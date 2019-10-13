@@ -97,7 +97,7 @@ function Player:jump_shoot()
         self.yv = -150
         self.y = self.y
         self.jumping = true
-        bullets:newBullet(self.x, self.y - bullets.bulletH * 3, -1)
+        bullets:newBullet(self.x + self.image:getHeight() / 2, self.y - bullets.bulletH, -1)
     end
 end
 
