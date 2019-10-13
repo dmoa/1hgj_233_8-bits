@@ -36,9 +36,6 @@ function Player:movement(dt)
     self.y = self.y + self.yv * dt
     self.yv = self.yv + 400 * dt
 
-    if love.keyboard.isDown("space") then
-        self:jump_shoot()
-    end
 end
 
 function Player:collision()
@@ -55,7 +52,7 @@ function Player:collision()
         self.x = gameWL - self.image:getWidth()
         self.xv = 0
     end
-
+    
     if block:isColliding(self.x, self.y, self.image:getWidth(), self.image:getHeight()) then
         if self.oldX + self.image:getWidth() <= block.x then
             self.x = block.x - self.image:getWidth()
@@ -84,6 +81,10 @@ function Player:collision()
             self.oldY = self.y
             self.yv = 0
         end
+    end
+    
+    if love.keyboard.isDown("space") then
+        self:jump_shoot()
     end
 end
 
