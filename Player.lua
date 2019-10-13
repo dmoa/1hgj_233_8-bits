@@ -35,7 +35,10 @@ function Player:movement(dt)
     self.x = self.x + self.xv * dt
     self.y = self.y + self.yv * dt
     self.yv = self.yv + 400 * dt
-
+    
+    if love.keyboard.isDown("space") then
+        self:jump_shoot()
+    end
 end
 
 function Player:collision()
@@ -82,10 +85,11 @@ function Player:collision()
             self.yv = 0
         end
     end
-    
-    if love.keyboard.isDown("space") then
-        self:jump_shoot()
+
+    if not (self.yv == 0) then 
+        self.jumping = true
     end
+    
 end
 
 function Player:jump_shoot()
